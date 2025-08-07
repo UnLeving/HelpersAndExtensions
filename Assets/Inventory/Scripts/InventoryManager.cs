@@ -22,8 +22,6 @@ namespace HelpersAndExtensions.Inventory
                 if (inventoryItem == null || inventoryItem.item != item ||
                     inventoryItem.Amount >= inventoryItem.item.maxStackSize) continue;
                 
-                Debug.Log($"Added item {item.name} to slot stack {i} with amount {inventoryItem.Amount} max {inventoryItem.item.maxStackSize}");
-                
                 inventoryItem.Amount++;
 
                 return true;
@@ -37,12 +35,8 @@ namespace HelpersAndExtensions.Inventory
                 
                 SpawnNewItem(item, slots[i]);
                     
-                Debug.Log($"Added item {item.name} to slot {i}");
-
                 return true;
             }
-            
-            Debug.LogWarning($"No free slots for item {item.name}");
             
             return false;
         }
