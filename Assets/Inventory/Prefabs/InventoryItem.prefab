@@ -227,4 +227,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountText: {fileID: 8677515256609411288}
   parentAfterDrag: {fileID: 0}
-  amount: 1
+  _amount: 1
+  item: {fileID: 0}

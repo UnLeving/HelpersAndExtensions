@@ -10,7 +10,19 @@ namespace HelpersAndExtensions.Inventory
     {
         [SerializeField] private TextMeshProUGUI amountText;
         [HideInInspector] public Transform parentAfterDrag;
-        public int amount = 1;
+        [SerializeField]private int _amount = 1;
+
+        public int Amount
+        {
+            get => _amount;
+            set
+            {
+                _amount = value;
+
+                UpdateText();
+            }
+        }
+
         private Image _image;
         public ItemSO item;
 
@@ -49,9 +61,9 @@ namespace HelpersAndExtensions.Inventory
 
         private void UpdateText()
         {
-            if(amount > 1)
+            if (Amount > 1)
             {
-                amountText.text = amount.ToString();
+                amountText.text = Amount.ToString();
             }
         }
     }

@@ -20,11 +20,11 @@ namespace HelpersAndExtensions.Inventory
                 var inventoryItem = slots[i].GetComponentInChildren<InventoryItem>();
 
                 if (inventoryItem == null || inventoryItem.item != item ||
-                    inventoryItem.amount >= inventoryItem.item.maxStackSize) continue;
+                    inventoryItem.Amount >= inventoryItem.item.maxStackSize) continue;
                 
-                inventoryItem.amount++;
-                    
-                Debug.Log($"Added item {item.name} to slot stack {i}");
+                Debug.Log($"Added item {item.name} to slot stack {i} with amount {inventoryItem.Amount} max {inventoryItem.item.maxStackSize}");
+                
+                inventoryItem.Amount++;
 
                 return true;
             }
