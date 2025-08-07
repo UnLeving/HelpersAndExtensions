@@ -19,14 +19,27 @@ namespace HelpersAndExtensions.Inventory
             {
                 var inventoryItem = slots[i].GetComponentInChildren<InventoryItem>();
 
-                if (inventoryItem == null)
-                {
-                    SpawnNewItem(item, slots[i]);
+                if (inventoryItem == null || inventoryItem.item != item ||
+                    inventoryItem.amount >= inventoryItem.item.maxStackSize) continue;
+                
+                inventoryItem.amount++;
                     
-                    Debug.Log($"Added item {item.name} to slot {i}");
+                Debug.Log($"Added item {item.name} to slot stack {i}");
 
-                    return true;
-                }
+                return true;
+            }
+            
+            for (int i = 0; i < slots.Length; i++)
+            {
+                var inventoryItem = slots[i].GetComponentInChildren<InventoryItem>();
+
+                if (inventoryItem != null) continue;
+                
+                SpawnNewItem(item, slots[i]);
+                    
+                Debug.Log($"Added item {item.name} to slot {i}");
+
+                return true;
             }
             
             Debug.LogWarning($"No free slots for item {item.name}");
