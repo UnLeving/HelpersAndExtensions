@@ -1,15 +1,18 @@
-using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Inventory
+namespace HelpersAndExtensions.Inventory
 {
     [RequireComponent(typeof(Image))]
-    public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        private Image _image;
+        [SerializeField] private TextMeshProUGUI amountText;
         public Transform parentAfterDrag;
+        public int amount = 1;
+        private Image _image;
+        private ItemSO _item;
 
         private void Awake()
         {
@@ -36,6 +39,12 @@ namespace Inventory
             transform.SetParent(parentAfterDrag);
             
             _image.raycastTarget = true;
+        }
+
+        public void Initialize(ItemSO item)
+        {
+            _item = item;
+            _image.sprite = item.icon;
         }
     }
 }
