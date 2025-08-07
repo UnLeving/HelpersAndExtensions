@@ -9,9 +9,13 @@ namespace HelpersAndExtensions.Inventory
     public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField] private TextMeshProUGUI amountText;
-        [HideInInspector] public Transform parentAfterDrag;
-        [SerializeField]private int _amount = 1;
-
+        
+        private Transform _parentAfterDrag;
+        private Image _image;
+        private int _amount = 1;
+        
+        public ItemSO ItemSo {get; private set;}
+        
         public int Amount
         {
             get => _amount;
@@ -23,17 +27,20 @@ namespace HelpersAndExtensions.Inventory
             }
         }
 
-        private Image _image;
-        public ItemSO item;
-
         private void Awake()
         {
             _image = GetComponent<Image>();
         }
+        
+        public void Initialize(ItemSO item)
+        {
+            this.ItemSo = item;
+            _image.sprite = item.icon;
+        }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            parentAfterDrag = transform.parent;
+            _parentAfterDrag = transform.parent;
 
             transform.SetParent(transform.root);
             transform.SetAsLastSibling();
@@ -48,15 +55,9 @@ namespace HelpersAndExtensions.Inventory
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            transform.SetParent(parentAfterDrag);
+            transform.SetParent(_parentAfterDrag);
 
             _image.raycastTarget = true;
-        }
-
-        public void Initialize(ItemSO item)
-        {
-            this.item = item;
-            _image.sprite = item.icon;
         }
 
         private void UpdateText()
@@ -65,6 +66,11 @@ namespace HelpersAndExtensions.Inventory
             {
                 amountText.text = Amount.ToString();
             }
+        }
+
+        public void SetParentAfterDrag(Transform parent)
+        {
+            _parentAfterDrag = parent;
         }
     }
 }

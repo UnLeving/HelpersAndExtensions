@@ -10,7 +10,7 @@ namespace HelpersAndExtensions.Inventory
             var obj = eventData.pointerDrag;
             var inventoryItem = obj.GetComponent<InventoryItem>();
             
-            inventoryItem.parentAfterDrag = transform;
+            inventoryItem.SetParentAfterDrag(transform);
         }
     }
 }

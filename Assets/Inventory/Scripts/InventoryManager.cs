@@ -19,8 +19,8 @@ namespace HelpersAndExtensions.Inventory
             {
                 var inventoryItem = slots[i].GetComponentInChildren<InventoryItem>();
 
-                if (inventoryItem == null || inventoryItem.item != item ||
-                    inventoryItem.Amount >= inventoryItem.item.maxStackSize) continue;
+                if (inventoryItem == null || inventoryItem.ItemSo != item ||
+                    inventoryItem.Amount >= inventoryItem.ItemSo.maxStackSize) continue;
                 
                 inventoryItem.Amount++;
 
